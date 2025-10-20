@@ -51,21 +51,21 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo & Description */}
           <div className="space-y-4">
-            <div className="text-white">{logo}</div>
-            <p className="text-neutral-400 text-sm">
+            {logo}
+            <p className="text-neutral-300 text-sm leading-relaxed">
               Empowering communities through education and technology in Tarime, Musoma, Tanzania.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <button
                     onClick={() => handleNavClick(item.href)}
-                    className="text-neutral-400 hover:text-white transition-colors text-sm"
+                    className="text-neutral-300 hover:text-primary transition-colors text-sm hover:underline"
                   >
                     {item.label}
                   </button>
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Social Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => {
                 const Icon = socialIcons[link.platform];
@@ -107,8 +107,8 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-neutral-800 pt-8 text-center">
-          <p className="text-neutral-400 text-sm">&copy;{copyrightText}</p>
+        <div className="border-t border-neutral-700 pt-8 text-center">
+          <p className="text-neutral-300 text-sm">&copy;{copyrightText}</p>
         </div>
       </div>
     </footer>

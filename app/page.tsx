@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Logo } from '@/components/Logo';
+import { DonationModal } from '@/components/DonationModal';
 import { Hero } from '@/sections/Hero';
 import { About } from '@/sections/About';
 import { Programs } from '@/sections/Programs';
@@ -19,6 +20,7 @@ import {
 } from 'lucide-react';
 
 export default function Home() {
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   // Navigation items
   const navItems = [
     { label: 'Home', href: '#home' },
@@ -81,8 +83,7 @@ export default function Home() {
       icon: <DollarSign size={48} />,
       buttonText: 'Make a Donation',
       onButtonClick: () => {
-        // You can replace this with actual donation page URL
-        alert('Donation page coming soon! Please contact us for donation information.');
+        setIsDonationModalOpen(true);
       },
     },
   ];
@@ -90,7 +91,7 @@ export default function Home() {
   // Contact details
   const contactDetails = {
     address: 'Tarime, Musoma, Tanzania',
-    email: 'info@peacebuildinginitiative.org',
+    email: 'peacebuildinginitiativetanzania@gmail.com',
     phone: '+255 XXX XXX XXX',
   };
 
@@ -103,7 +104,7 @@ export default function Home() {
     { platform: 'facebook' as const, url: 'https://facebook.com/pbi' },
     { platform: 'twitter' as const, url: 'https://twitter.com/pbi' },
     { platform: 'instagram' as const, url: 'https://instagram.com/pbi' },
-    { platform: 'email' as const, url: 'mailto:info@peacebuildinginitiative.org' },
+    { platform: 'email' as const, url: 'mailto:peacebuildinginitiativetanzania@gmail.com' },
   ];
 
   const handleContactSubmit = (data: {
@@ -111,20 +112,58 @@ export default function Home() {
     email: string;
     message: string;
   }) => {
-    // Handle form submission - you can integrate with your backend here
+    // Prepare email content
+    const subject = encodeURIComponent('Contact Form Submission - Peace Building Initiative');
+    const body = encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+    );
+    const mailtoLink = `mailto:peacebuildinginitiativetanzania@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Log for backend integration
     console.log('Contact form submitted:', data);
-    alert('Thank you for your message! We will get back to you soon.');
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    alert('Thank you for your message! Your email client will open to send your inquiry.');
+  };
+
+  const handleDonationSubmit = (data: {
+    name: string;
+    email: string;
+    amount: string;
+    message: string;
+  }) => {
+    // Prepare donation inquiry email
+    const subject = encodeURIComponent('Donation Inquiry - Peace Building Initiative');
+    const body = encodeURIComponent(
+      `DONATION INQUIRY\n\nName: ${data.name}\nEmail: ${data.email}\nIntended Amount: ${data.amount || 'Not specified'}\n\nMessage:\n${data.message || 'No additional message'}\n\n---\nPlease respond with donation details and payment options.`
+    );
+    const mailtoLink = `mailto:peacebuildinginitiativetanzania@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Log for backend integration
+    console.log('Donation inquiry submitted:', data);
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    alert(`Thank you, ${data.name}! Your email client will open to send your donation inquiry.`);
   };
 
   return (
     <main id="home">
+      {/* Donation Modal */}
+      <DonationModal
+        isOpen={isDonationModalOpen}
+        onClose={() => setIsDonationModalOpen(false)}
+        onSubmit={handleDonationSubmit}
+      />
+
       {/* Navigation */}
       <Navbar
         logo={<Logo size="sm" />}
         navItems={navItems}
-        onDonateClick={() => {
-          alert('Donation page coming soon! Please contact us for donation information.');
-        }}
+        onDonateClick={() => setIsDonationModalOpen(true)}
       />
 
       {/* Hero Section */}
@@ -143,9 +182,7 @@ export default function Home() {
       />
 
       {/* About Section */}
-      <About
-        missionText="At Peace Building Initiative, we believe that education and technology are powerful tools for transformation. Our mission is to provide accessible computer-assisted learning opportunities to students in Tarime, Musoma, while fostering a culture of peace and understanding in our community. Through our comprehensive programs, we're not just teaching digital skills—we're building bridges, creating opportunities, and empowering the next generation of leaders who will shape Tanzania's future."
-      />
+      <About />
 
       {/* Programs Section */}
       <Programs programs={programs} />
@@ -162,7 +199,7 @@ export default function Home() {
 
       {/* Footer */}
       <Footer
-        logo={<Logo size="sm" />}
+        logo={<Logo size="sm" variant="light" />}
         navItems={navItems}
         socialLinks={socialLinks}
         copyrightText=" 2025 Peace Building Initiative. All rights reserved."

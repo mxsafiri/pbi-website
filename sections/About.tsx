@@ -6,11 +6,9 @@ import { motion } from 'framer-motion';
 import { Target, Eye, Heart } from 'lucide-react';
 import Image from 'next/image';
 
-export interface AboutProps {
-  missionText: string;
-}
+export interface AboutProps {}
 
-export const About: React.FC<AboutProps> = ({ missionText }) => {
+export const About: React.FC<AboutProps> = () => {
   const values = [
     {
       icon: <Target size={32} />,
@@ -77,7 +75,12 @@ export const About: React.FC<AboutProps> = ({ missionText }) => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-lg text-neutral-700 leading-relaxed mb-6">
-              {missionText}
+              At Peace Building Initiative, we believe{' '}
+              <span className="font-bold text-primary">education and technology</span>{' '}
+              drive change. Our mission is to offer accessible computer-assisted learning in{' '}
+              <span className="font-bold text-primary">Tarime, Musoma</span>, while fostering 
+              peace and understanding. We equip youth with digital skills, build bridges, and 
+              empower future leaders shaping Tanzania's future.
             </p>
             <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
               <div className="relative w-16 h-16 flex-shrink-0">
