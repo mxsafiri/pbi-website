@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, DollarSign, Mail, User, MessageSquare, ChevronDown } from 'lucide-react';
-import { Button } from './Button';
 
 export interface DonationModalProps {
   isOpen: boolean;
@@ -105,7 +104,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
               <form onSubmit={handleSubmit} className="flex-1 flex flex-col">
                 <div className="p-6 space-y-4 overflow-y-auto flex-1">
                   <p className="text-neutral-600 text-sm">
-                    Fill out the form below and we'll get back to you with donation details and options.
+                    Fill out the form below and we&apos;ll get back to you with donation details and options.
                   </p>
 
                 {/* Name */}
@@ -214,7 +213,7 @@ export const DonationModal: React.FC<DonationModalProps> = ({
                       onChange={handleChange}
                       rows={3}
                       className="w-full pl-10 pr-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition resize-none"
-                      placeholder="Tell us how you'd like to help..."
+                      placeholder="Tell us how you&apos;d like to help..."
                     />
                   </div>
                 </div>
